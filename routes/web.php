@@ -7,17 +7,20 @@ use App\Livewire\ArtPiece\ShowArtPiece;
 use App\Livewire\ArtPiece\AugmentedView;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 })->name('home');
 
 Route::get('art-pieces', IndexArtPieces::class)->name('art-pieces.index');
 Route::get('art-pieces/{id}', ShowArtPiece::class)->name('art-pieces.show');
 Route::get('art-pieces/{id}/augmented', AugmentedView::class)->name('art-pieces.augmented');
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
 
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+// Route::view('dashboard', 'dashboard')
+//     ->middleware(['auth', 'verified'])
+//     ->name('dashboard');
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
